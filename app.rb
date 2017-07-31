@@ -47,9 +47,9 @@ EM.schedule do
   client = TweetStream::Client.new
 
   client.on_timeline_status do |status|
-    #if ( status.text =~ /#(open|close|update)/i )
-    send_sms("#{status.text}")
-    #end
+    if ( status.text =~ /#(open|close|update)/i )
+      send_sms("#{status.text}")
+    end
   end
 
   client.userstream
