@@ -32,7 +32,7 @@ def send_sms(message)
   twilio.messages.create(
     to: ENV["MY_PHONE_NUMBER"],
     from: ENV["TWILIO_NUMBER"],
-    body: message
+    body: "#{message.sub!(/#\w+$/, '')}"
   )
 end
 
@@ -48,8 +48,7 @@ EM.schedule do
 
   client.on_timeline_status do |status|
     if ( status.text =~ /#(open|close|update)/i )
-      status.text.sub!(/#\w+$/, '')
-      send_sms(status.text)
+      send_sms("#{status.text}")
     end
   end
 
