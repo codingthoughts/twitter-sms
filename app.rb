@@ -48,7 +48,8 @@ EM.schedule do
 
   client.on_timeline_status do |status|
     if ( status.text =~ /#(open|close|update)/i )
-      send_sms("#{status.text}")
+      sendText = status.text.gsub!(/\B[#]\S+$/, '')
+      send_sms("#{sendText}")
     end
   end
 
