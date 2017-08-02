@@ -32,7 +32,7 @@ def send_sms(message)
   twilio.messages.create(
     to: ENV["MY_PHONE_NUMBER"],
     from: ENV["TWILIO_NUMBER"],
-    body: "#{message.sub!(/#\w+$/, '')}"
+    body: "#{message.gsub(/#\w+$/, '')}"
   )
 end
 
