@@ -50,7 +50,7 @@ EM.schedule do
     if ( status.text =~ /#(open|close|update)/i )
       #sendText = status.text.gsub!(/\B[#]\S+$/, '')
       sendText = status.text.clone
-      sendText.gsub! /#\w+$/, ''
+      sendText = sendText.sub!(/#\w+$/, '')
       send_sms("#{sendText}")
     end
   end
